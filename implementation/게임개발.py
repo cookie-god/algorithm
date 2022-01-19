@@ -1,3 +1,11 @@
+# 다양한 예시
+# 4 4 
+# 1 1 0
+# 1 1 1 1
+# 0 0 0 0
+# 0 0 0 0
+# 1 0 0 1
+
 N, M = map(int, input().split())
 x, y, direction = map(int, input().split())
 arr = []
