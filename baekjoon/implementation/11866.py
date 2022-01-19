@@ -17,6 +17,3 @@ for i in range(len(answer)-1):
     print("%d, " %answer[i], end="")
 print(answer[len(answer)-1], end="")
 print(">")
-
-
-
