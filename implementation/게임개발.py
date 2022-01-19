@@ -25,6 +25,7 @@ turn = 0 #회전횟수
 def checkValid(x, y):
     if x < 0 or x >= M or y < 0 or y >= N:
         return False
+    
     return True
 
 #무한루프 반복문을 만든 뒤, 탈출 조건을 세워줌
