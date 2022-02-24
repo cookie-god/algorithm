@@ -9,6 +9,8 @@ for i in range (n):
 
 if n == 1:
     print(array[0])
+elif n < 3: #3보다 작은경우
+    print(array[0]+array[1])
 else:
     dp.append(array[0]) #dp[0]은 첫번째 계단
     dp.append(max(array[0]+array[1], array[1])) #dp[1]은 첫번째와 두번째 더한것과 두번째 계단만 더한것중 큰 값
