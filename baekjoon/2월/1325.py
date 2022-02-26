@@ -45,43 +45,36 @@
 #         print(key, end=' ')
 #
 #
-
+from collections import deque
 import sys
 
-input = sys.stdin.readline  # 중요!!!!, 입력 속도가 느리면 통과 불가능.
-from collections import deque
+input = sys.stdin.readline
 
-
-# 너비 우선 탐색
-def bfs(s):
-    D = 0
+def bfs(x):
     q = deque()
-    q.append(s)
-    visit = [0] * (N + 1)
-    visit[s] = 1
+    c = [0 for _ in range(n)]
+    q.append(x)
+    c[x] = 1
+    cnt = 1
     while q:
-        here = q.popleft()
-        D += 1
-        for w in G[here]:
-            if not visit[w]:
-                visit[w] = 1
-                q.append(w)
-    return D  # 방문한 정점의 수 D를 리턴한다.
+        x = q.popleft()
+        for nx in a[x]:
+            if c[nx] == 0:
+                cnt += 1
+                c[nx] = 1
+                q.append(nx)
+    return cnt
 
+n, m = map(int, input().split())
+a = [[] for _ in range(n)]
 
-N, M = map(int, input().split())
-G = [[] for _ in range(N + 1)]
-for i in range(M):
-    a, b = map(int, input().split())
-    G[b].append(a)
-mxd = 0
-result = []
-for i in range(1, N + 1):
-    if G[i]:
-        tmp = bfs(i)  # 리턴값을 받아서 최대값과 비교
-        if mxd <= tmp:
-            if mxd < tmp:
-                result = []
-            mxd = tmp
-            result.append(i)
-print(*result)
+for _ in range(m):
+    x, y = map(int, input().split())
+    a[y-1].append(x-1)
+
+ans = [0 for _ in range(n)]
+for i in range(n):
+    ans[i] = bfs(i)
+for i in range(n):
+    if ans[i] == max(ans):
+        print(i+1, end=' ')
