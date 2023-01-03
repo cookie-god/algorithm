@@ -51,42 +51,44 @@ def solution(key, lock):
 #     new = [[0] * n for _ in range(m)]
 #     for i in range(n):
 #         for j in range(m):
-#             new[j][n - i - 1] = list_2d[i][j]
+#             new[j][n - i - 1] = list_2d[i][j]  # 90도를 회전시키는 로직
 #     return new
 #
-# def checkBorder(x, y, lockRaw, lockColumn):
+# def checkBorder(x, y, lockRaw, lockColumn):  # 경계선을 넘어갔는지 체크하는 함수
 #     if x < 0 or x >= lockRaw or y < 0 or y >= lockColumn:
 #         return False
 #     return True
 #
-# def checkOpen(lock_2d):
+# def checkOpen(lock_2d):  # 열 수 있는지 체크하는 함수
 #     for i in range(len(lock_2d)):
 #         for j in range(len(lock_2d[0])):
-#             if lock_2d[i][j] == 0:
+#             if lock_2d[i][j] == 0:  # 0이 하나라도 존재하면 열 수 없음
 #                 return False
 #     return True
 #
 # def solution(key, lock):
 #     answer = False
+#     # 각각의 Key와 Lock 길이 계산
 #     keyRow = len(key)
 #     keyColumn = len(key[0])
 #     lockRow  = len(lock)
 #     lockColumn = len(lock[0])
 #
-#     for i in range(4):
-#         key = rotate_90(key)
-#         for j in range(lockRow):
-#             for k in range(lockColumn):
-#                 for l in range(keyRow):
-#                     for m in range(keyColumn):
-#                         if checkBorder(l + j, m + k, lockRow, lockColumn):
-#                             lock[l + j][m + k] += key[l][m]
-#                 if checkOpen(lock):
+#     for i in range(4):  # 4번 회전 가능
+#         key = rotate_90(key)  # 90도 회전
+#         for j in range(lockRow):  # Lock 행에 대한 for문
+#             for k in range(lockColumn):  # Lock 열에 대한 for문
+#                 for l in range(keyRow):  # Key 행에 대한 for문
+#                     for m in range(keyColumn):  # Key 열에 대한 for문
+#                         if checkBorder(l + j, m + k, lockRow, lockColumn):  # 경계값 넘어가는지 체크
+#                             lock[l + j][m + k] += key[l][m]  # Lock에 key의 값을 더해줌
+#                 if checkOpen(lock):  # 열 수 있다면 종료
 #                     answer = True
 #                     return answer
+#                 # 열 수 없다면 롤백
 #                 for n in range(keyRow):
 #                     for o in range(keyColumn):
 #                         if checkBorder(j + n, m + o, lockRow, lockColumn):
-#                             lock[j + n][m + o] -= key[n][o]
+#                             lock[j + n][m + o] -= key[n][o]  # Lock 다시 롤백
 #
 #     return answer
