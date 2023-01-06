@@ -79,27 +79,27 @@ graph = [[] for _ in range(n+1)]
 
 for _ in range(m):
     a, b = map(int, sys.stdin.readline().strip().split())
-    graph[a].append(b)
+    graph[a].append(b)  # 도로 정보 입력
 
-distance = [-1]*(n+1)
-distance[x] = 0
+distance = [-1]*(n+1)  # -1로 초기화
+distance[x] = 0  # 출발 위치는 0으로 초기화
 
 def bfs():
-    queue = deque([x])
+    queue = deque([x])  # x 값을 큐에 삽입
 
     while queue:
-        now = queue.popleft()
+        now = queue.popleft()  # 큐에서 나온 데이터는 출발 도시
 
-        for i in graph[now]:
-            if distance[i] == -1:
-                distance[i] = distance[now]+1
-                queue.append(i)
+        for i in graph[now]:  # 출발 도시에서 연결되어있는 도시 찾기
+            if distance[i] == -1:  # 방문하지 않은 도시인 경우
+                distance[i] = distance[now]+1  # 거리 증가 시켜줌
+                queue.append(i)  # 큐에 삽입
 
 bfs()
 
-if k not in distance:
+if k not in distance:  # k만큼 떨어진 도시가 없는 경우
     print(-1)
-else:
+else:  # k만큼 떨어진 도시가 있는 경우
     for i in range(1, n + 1):
         if distance[i] == k:
             print(i)
