@@ -32,4 +32,5 @@ import sys
 N = int(sys.stdin.readline().strip())
 array = list(map(int, sys.stdin.readline().split()))
 array.sort()
+# 가운데에서 벗어나는 경우 총합이 커진다
 print(array[(N - 1) // 2])
